@@ -48,17 +48,17 @@ const Footer = () => {
           <h3 className="footer-heading">Follow Us</h3>
           <ul className="footer-social">
             <li>
-              <a href="#" className="footer-link">
+              <a href="https://www.facebook.com/" className="footer-link">
                 Facebook
               </a>
             </li>
             <li>
-              <a href="#" className="footer-link">
+              <a href="https://x.com/?lang=en" className="footer-link">
                 Twitter
               </a>
             </li>
             <li>
-              <a href="#" className="footer-link">
+              <a href="https://in.linkedin.com/" className="footer-link">
                 LinkedIn
               </a>
             </li>

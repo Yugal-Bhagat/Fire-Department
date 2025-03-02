@@ -34,11 +34,19 @@
 
 // export default App
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
+import Login from "./pages/Auth/Login";
 // import About from "./pages/About";
 // import Contact from "./pages/Contact";
-import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Register from "./pages/Auth/Register";
+import Contact from "./pages/Contact";
+import ForgotPassword from "./pages/Auth/ForgotPassword";
+import NotFound from "./pages/NotFound";
+import ApplyNOC from "./pages/NOC/ApplyNOC";
+import TrackNOC from "./pages/NOC/TrackNOC";
+import EmergencyContact from "./pages/EmergencyContact";
 
 function App() {
   return (
@@ -46,8 +54,14 @@ function App() {
       <Navbar /> {/* Navigation for switching between pages */}
       <Routes>
         <Route path="/" element={<Home />} />
-        {/* <Route path="/about" element={<About />} /> */}
-        {/* <Route path="/contact" element={<Contact />} /> */}
+        <Route path='/login' element={<Login />}/>
+        <Route path="/register" element={<Register />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/apply-noc" element={<ApplyNOC />} />
+        <Route path="/track-application" element={<TrackNOC/>} />
+        <Route path="/emergency-contact" element={<EmergencyContact/>} />
       </Routes>
       <Footer />
     </Router>

@@ -1,67 +1,65 @@
-import React from 'react';
-    import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./Login.css";
 
-    function LoginPage() {
-      return (
-        <div className="flex items-center justify-center min-h-screen bg-gray-100">
-          <div className="bg-white shadow-md rounded-lg p-8 w-full max-w-md">
-            <div className="text-center mb-6">
-              <h2 className="text-2xl font-bold">Welcome Back!</h2>
-              <p className="text-gray-600">Please Login to Continue.</p>
-            </div>
-            <form>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-                  Email
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
-                  Password
-                </label>
-                <input
-                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                  id="password"
-                  type="password"
-                  placeholder="Enter your password"
-                />
-              </div>
-              <div className="flex items-center justify-between mb-6">
-                <div className="flex items-center">
-                  <input
-                    id="remember"
-                    type="checkbox"
-                    className="mr-2 leading-tight"
-                  />
-                  <label className="text-sm" htmlFor="remember">
-                    Remember me
-                  </label>
-                </div>
-                <Link to="/forgot-password" className="text-sm text-blue-500 hover:text-blue-700">
-                  Forgot Password?
-                </Link>
-              </div>
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
-                type="button"
-              >
-                Login
-              </button>
-              <div className="text-center mt-4">
-                <p className="text-sm">
-                  New User? <Link to="/register" className="text-blue-500 hover:text-blue-700">Register Here</Link>
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      );
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Simple validation
+    if (!email || !password) {
+      setError("Please fill in all fields.");
+      return;
     }
 
-    export default LoginPage;
+    setError("");
+    console.log("Logging in with:", { email, password });
+  };
+
+  return (
+    <div className="login-container">
+      <div className="login-box">
+        <h2>Login</h2>
+        {error && <p className="error-message">{error}</p>}
+        <form onSubmit={handleSubmit}>
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <p className="forgot-password">
+            <Link to="/forgot-password">Forgot Password?</Link>
+          </p>
+          <button type="submit" className="login-button">
+            Login
+          </button>
+        </form>
+        <p className="register-link">
+          Don't have an account? <Link to="/register">Register</Link>
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
+
