@@ -37,8 +37,6 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Auth/Login";
-// import About from "./pages/About";
-// import Contact from "./pages/Contact";
 import Footer from "./components/Footer";
 import Register from "./pages/Auth/Register";
 import Contact from "./pages/Contact";
@@ -49,6 +47,7 @@ import TrackNOC from "./pages/NOC/TrackNOC";
 import EmergencyContact from "./pages/EmergencyContact";
 import UserDashboard from "./pages/Dashboard/UserDashboard"
 import AdminDashboard from "./pages/Dashboard/AdminDashboard"
+import ResetPassword from "./pages/Auth/ResetPassword";
 function App() {
   return (
     <Router>
@@ -59,6 +58,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />}/>
         <Route path="*" element={<NotFound />} />
         <Route path="/apply-noc" element={<ApplyNOC />} />
         <Route path="/track-application" element={<TrackNOC/>} />

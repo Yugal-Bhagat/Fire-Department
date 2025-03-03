@@ -1,27 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import viteLogo from "/vite.svg";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userRole, setUserRole] = useState(null);
   const location = useLocation();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  // Toggle menu for mobile view
+  useEffect(() => {
+    // Check if user is logged in
+    const token = localStorage.getItem("token");
+    const role = localStorage.getItem("role");
+    
+    if (token) {
+      setIsLoggedIn(true);
+      setUserRole(role);
+    } else {
+      setIsLoggedIn(false);
+      setUserRole(null);
+    }
+  }, [location]); // Runs when route changes
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  // Check if the user is on the Admin/User dashboard
-  const isDashboard =
-    location.pathname === "/admin-dashboard" || location.pathname === "/user-dashboard";
-
-  // Logout function (for future authentication integration)
   const handleLogout = () => {
-    console.log("User logged out");
-    navigate("/login")
-    // Add logout logic here (e.g., clear token, redirect, etc.)
+    localStorage.removeItem("token");
+    localStorage.removeItem("role");
+    setIsLoggedIn(false);
+    setUserRole(null);
+    navigate("/login");
   };
 
   return (
@@ -45,28 +57,28 @@ const Navbar = () => {
 
         {/* Navigation Links */}
         <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
-          <Link to="/" className="navbar-link">
-            Home
-          </Link>
-          <Link to="/apply-noc" className="navbar-link">
-            Apply for NOC
-          </Link>
-          <Link to="/track-application" className="navbar-link">
-            Track Application
-          </Link>
-          <Link to="/contact" className="navbar-link">
-            Contact Us
-          </Link>
+          <Link to="/" className="navbar-link">Home</Link>
+          <Link to="/apply-noc" className="navbar-link">Apply for NOC</Link>
+          <Link to="/track-application" className="navbar-link">Track Application</Link>
+          <Link to="/contact" className="navbar-link">Contact Us</Link>
 
-          {/* Conditionally Render Login/Logout Button */}
-          {isDashboard ? (
+          {/* Show Dashboard Button Only if User is Logged In */}
+          {isLoggedIn && (
+            <Link
+              to={userRole === "admin" ? "/admin-dashboard" : "/user-dashboard"}
+              className="navbar-link"
+            >
+              Dashboard
+            </Link>
+          )}
+
+          {/* Show Login or Logout Button */}
+          {isLoggedIn ? (
             <button onClick={handleLogout} className="navbar-link logout-button">
               Logout
             </button>
           ) : (
-            <Link to="/login" className="navbar-link">
-              Login
-            </Link>
+            <Link to="/login" className="navbar-link">Login</Link>
           )}
         </div>
 
