@@ -47,7 +47,8 @@ import NotFound from "./pages/NotFound";
 import ApplyNOC from "./pages/NOC/ApplyNOC";
 import TrackNOC from "./pages/NOC/TrackNOC";
 import EmergencyContact from "./pages/EmergencyContact";
-
+import UserDashboard from "./pages/Dashboard/UserDashboard"
+import AdminDashboard from "./pages/Dashboard/AdminDashboard"
 function App() {
   return (
     <Router>
@@ -62,6 +63,8 @@ function App() {
         <Route path="/apply-noc" element={<ApplyNOC />} />
         <Route path="/track-application" element={<TrackNOC/>} />
         <Route path="/emergency-contact" element={<EmergencyContact/>} />
+        <Route path="/user-dashboard" element={<UserDashboard/>}/>
+        <Route path="/admin-dashboard" element={<AdminDashboard/>}/>
       </Routes>
       <Footer />
     </Router>
