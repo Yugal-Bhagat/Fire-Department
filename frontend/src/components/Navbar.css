@@ -86,7 +86,10 @@
 .navbar-emergency .emergency-button:hover {
   background-color: #c53030;
 }
-
+.logout-button{
+  border: none;
+  background-color: transparent;
+}
 /* Responsive Design */
 @media (max-width: 768px) {
   .navbar-mobile-menu {

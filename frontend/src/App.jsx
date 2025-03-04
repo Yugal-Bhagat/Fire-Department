@@ -54,6 +54,7 @@ import EmergencyContact from "./pages/EmergencyContact";
 import UserDashboard from "./pages/Dashboard/UserDashboard";
 import AdminDashboard from "./pages/Dashboard/AdminDashboard";
 import ResetPassword from "./pages/Auth/ResetPassword";
+import PrivacyPolicy from "./pages/pri/PrivacyPolicy";
 
 // Function to check authentication
 const isAuthenticated = () => {
@@ -78,7 +79,7 @@ function App() {
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/emergency-contact" element={<EmergencyContact />} />
-
+<Route path="/privacy-policy" element={<PrivacyPolicy />} />
         {/* Protected Routes */}
         <Route
           path="/apply-noc"

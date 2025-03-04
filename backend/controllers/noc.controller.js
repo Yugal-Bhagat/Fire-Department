@@ -3,26 +3,47 @@ const NOC = require('../models/noc.model');
 // Apply for NOC
 exports.applyNOC = async (req, res) => {
   try {
-    const { fullName, mobile, email, address, buildingType, propertySize, hasFireSafety, extinguishers, smokeDetectors, waterSprinklers, declaration } = req.body;
-    
+    const {
+      fullName,
+      mobile,
+      email,
+      address,
+      buildingType,
+      propertySize,
+      hasFireSafety,
+      extinguishers,
+      smokeDetectors,
+      waterSprinklers,
+      declaration,
+    } = req.body;
+
+    // File paths from multer
     const aadhaarCard = req.files['aadhaarCard'] ? req.files['aadhaarCard'][0].path : null;
     const panCard = req.files['panCard'] ? req.files['panCard'][0].path : null;
     const fireSafetyCert = req.files['fireSafetyCert'] ? req.files['fireSafetyCert'][0].path : null;
 
-    if (!aadhaarCard || !panCard) {
-      return res.status(400).json({ message: 'Aadhaar and PAN card are required' });
-    }
-
-    const newNOC = new NOC({
-      fullName, mobile, email, address, buildingType, propertySize, hasFireSafety, extinguishers, smokeDetectors, waterSprinklers, declaration,
-      aadhaarCard, panCard, fireSafetyCert
+    // Create a new NOC application
+    const nocApplication = await NOC.create({
+      fullName,
+      mobile,
+      email,
+      address,
+      buildingType,
+      propertySize,
+      hasFireSafety,
+      extinguishers,
+      smokeDetectors,
+      waterSprinklers,
+      aadhaarCard,
+      panCard,
+      fireSafetyCert,
+      declaration,
     });
 
-    await newNOC.save();
-    res.status(201).json({ message: 'NOC Application submitted successfully', data: newNOC });
-
+    res.status(201).json(nocApplication);
   } catch (error) {
-    res.status(500).json({ message: 'Error applying for NOC', error: error.message });
+    console.error('Error creating NOC application:', error);
+    res.status(500).json({ message: 'Failed to create NOC application' });
   }
 };
 
