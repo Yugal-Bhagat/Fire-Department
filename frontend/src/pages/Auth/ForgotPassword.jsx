@@ -11,7 +11,7 @@ const ForgotPassword = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage("");
-    setLoading(true); // Start loading
+    setLoading(true);
 
     if (!email.trim()) {
       setMessage("Please enter your email.");
@@ -20,16 +20,24 @@ const ForgotPassword = () => {
     }
 
     try {
-      console.log("radhe");
-      
       const response = await axios.post("http://localhost:5000/api/users/forgot-password", { email });
 
-      setMessage(response.data.message || "A password reset link has been sent to your email.");
+      if (response.data.message) {
+        setMessage(response.data.message);
+      } else {
+        setMessage("A password reset link has been sent to your email.");
+      }
     } catch (error) {
-      setMessage(error.response?.data?.message || "Something went wrong. Please try again.");
+      if (error.response) {
+        setMessage(error.response.data.message || "Something went wrong. Please try again.");
+      } else if (error.request) {
+        setMessage("No response from the server. Please check your connection.");
+      } else {
+        setMessage("An error occurred. Please try again.");
+      }
     }
 
-    setLoading(false); // Stop loading
+    setLoading(false);
   };
 
   return (

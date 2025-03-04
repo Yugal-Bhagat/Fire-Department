@@ -1,133 +1,124 @@
 /* Navbar Container */
 .navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
-  }
-  
-  .navbar-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  /* Logo */
-  .navbar-logo img {
-    height: 40px;
-    width: auto;
-  }
-  
-  /* Mobile Menu Icon */
-  .navbar-mobile-menu {
-    display: none;
-    cursor: pointer;
-  }
-  
-  .menu-icon {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    height: 24px;
-    width: 30px;
-  }
-  
-  .menu-icon span {
-    height: 3px;
-    width: 100%;
-    background-color: #333;
-    transition: all 0.3s ease;
-  }
-  
-  .menu-icon.open span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-  }
-  
-  .menu-icon.open span:nth-child(2) {
-    opacity: 0;
-  }
-  
-  .menu-icon.open span:nth-child(3) {
-    transform: rotate(-45deg) translate(5px, -5px);
-  }
-  
-  /* Navigation Links */
-  .navbar-links {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-  
-  .navbar-link {
-    color: #333;
-    text-decoration: none;
-    font-size: 18px; /* Increased font size */
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .navbar-link:hover {
-    color: #e53e3e;
-  }
-  
-  /* Emergency Contact Button */
-  .navbar-emergency .emergency-button {
-    background-color: #e53e3e;
-    color: #ffffff;
-    padding: 10px 20px; /* Slightly larger padding */
-    border-radius: 4px;
-    text-decoration: none;
-    font-size: 18px; /* Increased font size */
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-  }
-  
-  .navbar-emergency .emergency-button:hover {
-    background-color: #c53030;
-  }
-  /* Logout Button */
-.logout-button {
-  background: none;
-  border: none;
-  color: #333;
-  font-size: 18px;
-  font-weight: 500;
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.navbar-logo img {
+  height: 40px;
+  width: auto;
+}
+
+/* Mobile Menu Icon */
+.navbar-mobile-menu {
+  display: none;
   cursor: pointer;
+}
+
+.menu-icon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 24px;
+  width: 30px;
+}
+
+.menu-icon span {
+  height: 3px;
+  width: 100%;
+  background-color: #333;
+  transition: all 0.3s ease;
+}
+
+.menu-icon.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-icon.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Navigation Links */
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-link {
+  color: #333;
+  text-decoration: none;
+  font-size: 18px; /* Increased font size */
+  font-weight: 500;
   transition: color 0.3s ease;
 }
 
-.logout-button:hover {
+.navbar-link:hover {
   color: #e53e3e;
 }
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .navbar-mobile-menu {
-      display: block;
-    }
-  
-    .navbar-links {
-      display: none;
-      flex-direction: column;
-      position: absolute;
-      top: 60px;
-      left: 0;
-      width: 100%;
-      background-color: #ffffff;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-    }
-  
-    .navbar-links.active {
-      display: flex;
-    }
-  
-    .navbar-link {
-      margin: 15px 0; /* Increased margin for better spacing */
-      font-size: 20px; /* Larger font size for mobile */
-    }
-  
-    .navbar-emergency {
-      display: none;
-    }
+
+/* Emergency Contact Button */
+.navbar-emergency .emergency-button {
+  background-color: #e53e3e;
+  color: #ffffff;
+  padding: 10px 20px; /* Slightly larger padding */
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 18px; /* Increased font size */
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.navbar-emergency .emergency-button:hover {
+  background-color: #c53030;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar-mobile-menu {
+    display: block;
   }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+
+  .navbar-links.active {
+    display: flex;
+    z-index: 2;
+  }
+  .navbar-links.active .head-content{
+        z-index: 0;
+    }
+
+  .navbar-link {
+    margin: 15px 0; /* Increased margin for better spacing */
+    font-size: 20px; /* Larger font size for mobile */
+  }
+
+  .navbar-emergency {
+    display: none;
+  }
+}

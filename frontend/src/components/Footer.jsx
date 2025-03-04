@@ -20,11 +20,11 @@ const Footer = () => {
                 Apply for NOC
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/track-application" className="footer-link">
                 Track Application
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/contact" className="footer-link">
                 Contact Us

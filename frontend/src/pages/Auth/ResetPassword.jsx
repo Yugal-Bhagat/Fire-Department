@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 import "./ResetPassword.css";
 
 const ResetPassword = () => {
@@ -7,35 +8,44 @@ const ResetPassword = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const { token } = useParams();
+  const [loading, setLoading] = useState(false);
+  const { id, token } = useParams();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError("Passwords do not match.");
+      setLoading(false);
       return;
     }
-    setError("");
 
     try {
-      const response = await fetch(`http://localhost:5000/api/users/reset-password/${token}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ password }),
-      });
+      const response = await axios.put(`http://localhost:5000/api/users/reset-password/${id}/${token}`, { password });
 
-      const data = await response.json();
-      if (!response.ok) {
-        setError(data.message || "Failed to reset password");
-      } else {
-        setSuccess("Password reset successfully!");
+      if (response.data.message) {
+        setSuccess("Password reset successfully! Redirecting to login...");
         setTimeout(() => navigate("/login"), 3000);
+      } else {
+        console.log("hello");
+        
+        setError("Something went wrong. Please try again.");
       }
     } catch (error) {
-      console.error("Error resetting password:", error);
-      setError("Something went wrong. Try again later.");
+      if (error.response) {
+        setError(error.response.data.message || "Something went wrong. Please try again.");
+      } else if (error.request) {
+        setError("No response from the server. Please check your connection.");
+      } else {
+        setError("An error occurred. Please try again.");
+      }
     }
+
+    setLoading(false);
   };
 
   return (
@@ -53,6 +63,7 @@ const ResetPassword = () => {
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Enter new password"
               required
+              disabled={loading}
             />
           </div>
           <div className="input-group">
@@ -63,10 +74,11 @@ const ResetPassword = () => {
               onChange={(e) => setConfirmPassword(e.target.value)}
               placeholder="Confirm new password"
               required
+              disabled={loading}
             />
           </div>
-          <button type="submit" className="reset-button">
-            Reset Password
+          <button type="submit" className="reset-button" disabled={loading}>
+            {loading ? "Resetting..." : "Reset Password"}
           </button>
         </form>
       </div>

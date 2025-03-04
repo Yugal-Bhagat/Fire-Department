@@ -6,6 +6,8 @@ const userRoutes = require('./routes/user.route');
 const cors = require("cors");
 const helmet = require('helmet');
 const morgan = require('morgan');
+const nocRoutes = require('./routes/noc.routes');
+const path = require('path');
 
 dotenv.config();
 connectDB();
@@ -23,6 +25,8 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/api/users', userRoutes);
+app.use('/api/noc', nocRoutes);
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

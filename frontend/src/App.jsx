@@ -75,7 +75,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
+        <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/emergency-contact" element={<EmergencyContact />} />
 
@@ -88,14 +88,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-        <Route
+        {/* <Route
           path="/track-application"
           element={
             <ProtectedRoute>
               <TrackNOC />
             </ProtectedRoute>
           }
-        />
+        /> */}
         <Route
           path="/user-dashboard"
           element={

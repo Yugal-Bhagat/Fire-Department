@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import viteLogo from "/vite.svg";
+// import viteLogo from "/vite.svg";
+import  logo from "../assets/logo.png";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,7 @@ const Navbar = () => {
         {/* Logo */}
         <div className="navbar-logo">
           <Link to="/">
-            <img src={viteLogo} alt="Fire Department Logo" />
+            <img src={logo} alt="Fire Department Logo" />
           </Link>
         </div>
 
@@ -59,7 +60,7 @@ const Navbar = () => {
         <div className={`navbar-links ${isMenuOpen ? "active" : ""}`}>
           <Link to="/" className="navbar-link">Home</Link>
           <Link to="/apply-noc" className="navbar-link">Apply for NOC</Link>
-          <Link to="/track-application" className="navbar-link">Track Application</Link>
+          {/* <Link to="/track-application" className="navbar-link">Track Application</Link> */}
           <Link to="/contact" className="navbar-link">Contact Us</Link>
 
           {/* Show Dashboard Button Only if User is Logged In */}
