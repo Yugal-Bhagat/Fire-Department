@@ -153,6 +153,7 @@ const Login = () => {
       // Store authToken instead of token for consistency
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", data.role);
+      localStorage.setItem('userId', data._id);
 
       // Redirect based on user role
       navigate(data.role === "admin" ? "/admin-dashboard" : "/user-dashboard");

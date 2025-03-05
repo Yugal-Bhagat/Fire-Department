@@ -36,6 +36,17 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
+const userDetaile = asyncHandler(async (req, res) => {
+  // const { email, password } = req.body;
+  const ID = req.params.id
+  const user = await User.findOne({ _id:ID });
+  if (user) {
+    res.json({user});
+  } else {
+    res.status(401);
+    throw new Error('Invalid email or password');
+  }
+});
 
 
 const forgotPassword = async (req, res) => {
@@ -109,7 +120,7 @@ const resetPassword = async (req, res) => {
     return res.status(500).json({ message: "Something went wrong" });
   }
 };
-module.exports = { registerUser, loginUser, forgotPassword, resetPassword };
+module.exports = { registerUser, loginUser,userDetaile, forgotPassword, resetPassword };
 
 
 // const asyncHandler = require("express-async-handler");
