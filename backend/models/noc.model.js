@@ -16,7 +16,7 @@ const NOCSchema = new mongoose.Schema({
   aadhaarCard: { type: String, required: true },
   panCard: { type: String, required: true },
   fireSafetyCert: { type: String },
-
+  applicationId: { type: String, unique: true },
   declaration: { type: Boolean, required: true },
   status: { type: String, default: 'Pending' },
 }, { timestamps: true });

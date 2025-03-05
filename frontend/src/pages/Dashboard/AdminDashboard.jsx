@@ -862,3 +862,192 @@ const AdminDashboard = () => {
 }
 
 export default AdminDashboard
+
+
+// import React, { useState, useEffect } from "react";
+// import {
+//   Home,
+//   FileText,
+//   Calendar,
+//   CheckSquare,
+//   Settings,
+//   Bell,
+//   Search,
+//   ChevronDown,
+//   Menu,
+//   X,
+//   User,
+//   LogOut,
+//   CheckCircle,
+//   XCircle,
+//   AlertTriangle,
+//   Clock,
+//   Download,
+// } from "lucide-react";
+// import { toast, ToastContainer } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+// import api from "../../api/api1"
+// import "./AdminDashboard.css";
+
+// const AdminDashboard = () => {
+//   const [activeMenuItem, setActiveMenuItem] = useState("pending");
+//   const [applications, setApplications] = useState([]);
+//   const [selectedApplication, setSelectedApplication] = useState(null);
+//   const [searchTerm, setSearchTerm] = useState("");
+//   const [filterStatus, setFilterStatus] = useState("all");
+//   const [loading, setLoading] = useState(true);
+
+//   // Fetch all NOC applications
+//   useEffect(() => {
+//     const fetchApplications = async () => {
+//       try {
+//         const response = await api.get("/noc/all");
+//         setApplications(response.data);
+//         setLoading(false);
+//       } catch (error) {
+//         toast.error("Failed to fetch applications");
+//         setLoading(false);
+//       }
+//     };
+//     fetchApplications();
+//   }, []);
+
+//   // Handle application approval
+//   const handleApprove = async (id) => {
+//     try {
+//       const response = await api.put(`/noc/${id}/status`, { status: "approved" });
+//       setApplications((prev) =>
+//         prev.map((app) => (app._id === id ? response.data : app))
+//       );
+//       toast.success("Application approved successfully");
+//     } catch (error) {
+//       toast.error("Failed to approve application");
+//     }
+//   };
+
+//   // Handle application rejection
+//   const handleReject = async (id) => {
+//     try {
+//       const response = await api.put(`/noc/${id}/status`, { status: "rejected" });
+//       setApplications((prev) =>
+//         prev.map((app) => (app._id === id ? response.data : app))
+//       );
+//       toast.success("Application rejected successfully");
+//     } catch (error) {
+//       toast.error("Failed to reject application");
+//     }
+//   };
+
+//   // Filter applications based on search term and status
+//   const filteredApplications = applications.filter((app) => {
+//     const matchesSearch =
+//       searchTerm === "" ||
+//       app.applicationId.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//       app.fullName.toLowerCase().includes(searchTerm.toLowerCase());
+
+//     const matchesStatus = filterStatus === "all" || app.status === filterStatus;
+//     return matchesSearch && matchesStatus;
+//   });
+
+//   return (
+//     <div className="admin-dashboard">
+//       <ToastContainer />
+//       {/* Sidebar and Header (unchanged) */}
+
+//       {/* Content Area */}
+//       <div className="content-area">
+//         {/* Applications Table View */}
+//         {activeMenuItem === "pending" && (
+//           <div className="applications-view">
+//             {/* Filters and Search */}
+//             <div className="filters-bar">
+//               <div className="search-container">
+//                 <Search size={18} />
+//                 <input
+//                   type="text"
+//                   placeholder="Search by ID or name..."
+//                   value={searchTerm}
+//                   onChange={(e) => setSearchTerm(e.target.value)}
+//                 />
+//               </div>
+
+//               <div className="filters">
+//                 <div className="filter-group">
+//                   <label>Status:</label>
+//                   <select
+//                     value={filterStatus}
+//                     onChange={(e) => setFilterStatus(e.target.value)}
+//                   >
+//                     <option value="all">All</option>
+//                     <option value="pending">Pending</option>
+//                     <option value="approved">Approved</option>
+//                     <option value="rejected">Rejected</option>
+//                   </select>
+//                 </div>
+//               </div>
+//             </div>
+
+//             {/* Applications Table */}
+//             <div className="table-container">
+//               <table className="applications-table">
+//                 <thead>
+//                   <tr>
+//                     <th>Application ID</th>
+//                     <th>Full Name</th>
+//                     <th>Email</th>
+//                     <th>Status</th>
+//                     <th>Actions</th>
+//                   </tr>
+//                 </thead>
+//                 <tbody>
+//                   {loading ? (
+//                     <tr>
+//                       <td colSpan="5">Loading...</td>
+//                     </tr>
+//                   ) : filteredApplications.length > 0 ? (
+//                     filteredApplications.map((app) => (
+//                       <tr key={app._id}>
+//                         <td>{app.applicationId}</td>
+//                         <td>{app.fullName}</td>
+//                         <td>{app.email}</td>
+//                         <td>
+//                           <span className={`status-badge status-${app.status}`}>
+//                             {app.status}
+//                           </span>
+//                         </td>
+//                         <td className="actions-cell">
+//                           {app.status === "pending" && (
+//                             <>
+//                               <button
+//                                 className="action-button approve"
+//                                 onClick={() => handleApprove(app._id)}
+//                               >
+//                                 <CheckCircle size={16} /> Approve
+//                               </button>
+//                               <button
+//                                 className="action-button reject"
+//                                 onClick={() => handleReject(app._id)}
+//                               >
+//                                 <XCircle size={16} /> Reject
+//                               </button>
+//                             </>
+//                           )}
+//                         </td>
+//                       </tr>
+//                     ))
+//                   ) : (
+//                     <tr>
+//                       <td colSpan="5">No applications found</td>
+//                     </tr>
+//                   )}
+//                 </tbody>
+//               </table>
+//             </div>
+//           </div>
+//         )}
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default AdminDashboard;

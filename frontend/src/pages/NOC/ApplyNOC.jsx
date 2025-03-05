@@ -81,6 +81,61 @@ const ApplyNOC = () => {
 
   
 
+// const handleSubmit = async (e) => {
+//   e.preventDefault();
+//   if (validateStep(4)) {
+//     setIsSubmitting(true);
+//     try {
+//       // Submit logic here
+//       const formDataToSend = new FormData();
+
+//       // Append all form fields to the FormData object
+//       formDataToSend.append('fullName', formData.fullName);
+//       formDataToSend.append('mobile', formData.mobile);
+//       formDataToSend.append('email', formData.email);
+//       formDataToSend.append('address', formData.address);
+//       formDataToSend.append('buildingType', formData.buildingType);
+//       formDataToSend.append('propertySize', formData.propertySize);
+//       formDataToSend.append('hasFireSafety', formData.hasFireSafety);
+//       formDataToSend.append('extinguishers', formData.extinguishers);
+//       formDataToSend.append('smokeDetectors', formData.smokeDetectors);
+//       formDataToSend.append('waterSprinklers', formData.waterSprinklers);
+//       formDataToSend.append('declaration', formData.declaration);
+
+//       // Append files
+//       if (formData.aadhaarCard) {
+//         formDataToSend.append('aadhaarCard', formData.aadhaarCard);
+//       }
+//       if (formData.panCard) {
+//         formDataToSend.append('panCard', formData.panCard);
+//       }
+//       if (formData.fireSafetyCert) {
+//         formDataToSend.append('fireSafetyCert', formData.fireSafetyCert);
+//       }
+
+//       // Send the data to the backend
+//       const response = await fetch('http://localhost:5000/api/noc/apply', {
+//         method: 'POST',
+//         body: formDataToSend,
+//       });
+
+//       if (response.ok) {
+//         const result = await response.json();
+//         alert('Application submitted successfully!');
+//         console.log('Application ID:', result._id);
+//       } else {
+//         const errorData = await response.json();
+//         alert(`Error: ${errorData.message || 'Failed to submit application'}`);
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//     } finally {
+//       setIsSubmitting(false);
+//     }
+//   }
+// };
+
+
 const handleSubmit = async (e) => {
   e.preventDefault();
   if (validateStep(4)) {
@@ -121,14 +176,16 @@ const handleSubmit = async (e) => {
 
       if (response.ok) {
         const result = await response.json();
-        alert('Application submitted successfully!');
-        console.log('Application ID:', result._id);
+        // Display the application ID in a popup
+        alert(`NOC Application Submitted Successfully!\nYour Application ID is: ${result.applicationId}`);
+        console.log('Application ID:', result.applicationId);
       } else {
         const errorData = await response.json();
         alert(`Error: ${errorData.message || 'Failed to submit application'}`);
       }
     } catch (error) {
       console.error('Error:', error);
+      alert('An error occurred while submitting the application. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
